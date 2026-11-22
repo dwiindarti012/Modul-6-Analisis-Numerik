@@ -1,0 +1,37 @@
+import math
+
+def f(x):
+    return 2 * x * math.cos(2 * x)
+
+x = 2.0
+h = 0.1
+x_analitik = 4.747133
+
+# Metode Beda Maju (Forward Difference)
+turunan_maju = (f(x + h) - f(x)) / h
+galat_maju = abs(x_analitik - turunan_maju)
+
+# Metode Beda Mundur (Backward Difference)
+turunan_mundur = (f(x) - f(x - h)) / h
+galat_mundur = abs(x_analitik - turunan_mundur)
+
+# Metode Beda Tengah (Central Difference)
+turunan_tengah = (f(x + h) - f(x - h)) / (2 * h)
+galat_tengah = abs(x_analitik - turunan_tengah)
+
+print(f"Nilai x = {x}")
+print(f"Nilai h = {h}")
+print("=" * 50)
+print(f"Hasil Analitik     = {x_analitik:.6f}")
+print(f"Beda Maju          = {turunan_maju:.6f} (Galat: {galat_maju:.6f})")
+print(f"Beda Mundur        = {turunan_mundur:.6f} (Galat: {galat_mundur:.6f})")
+print(f"Beda Tengah        = {turunan_tengah:.6f} (Galat: {galat_tengah:.6f})")
+print("=" * 50)
+
+# Mencari galat terkecil
+if galat_maju < galat_mundur and galat_maju < galat_tengah:
+    print(f"Jadi, metode paling akurat adalah Beda Maju dengan galat {galat_maju:.6f}")
+elif galat_mundur < galat_maju and galat_mundur < galat_tengah:
+    print(f"Jadi, metode paling akurat adalah Beda Mundur dengan galat {galat_mundur:.6f}")
+else:
+    print(f"Jadi, metode paling akurat adalah Beda Tengah dengan galat {galat_tengah:.6f}")
